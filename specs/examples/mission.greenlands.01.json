@@ -1,0 +1,17 @@
+{
+  "id": "mission.greenlands.01",
+  "regionId": "region.greenlands",
+  "mapId": "map.greenlands.forestRoad",
+  "waveSetId": "waves.greenlands.01",
+  "difficultyProfile": "veteran",
+  "startingGold": 250,
+  "baseHealth": 20,
+  "allowedTowers": ["tower.archer"],
+  "objectives": [
+    { "type": "surviveAllWaves" }
+  ],
+  "rewards": {
+    "starsMax": 3,
+    "firstClear": { "riftCrystals": 0 }
+  }
+}

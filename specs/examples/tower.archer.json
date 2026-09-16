@@ -1,0 +1,21 @@
+{
+  "id": "tower.archer",
+  "nameKey": "tower.archer.name",
+  "buildCost": 80,
+  "targeting": {
+    "allowed": ["ground", "air"],
+    "defaultMode": "first"
+  },
+  "attack": {
+    "type": "projectile",
+    "damageType": "physical",
+    "damage": 18,
+    "range": 165,
+    "attacksPerSecond": 1.15,
+    "projectileId": "projectile.arrow.basic"
+  },
+  "upgradeGraphId": "upgrades.archer",
+  "assets": {
+    "level1": "tower.archer.level1"
+  }
+}

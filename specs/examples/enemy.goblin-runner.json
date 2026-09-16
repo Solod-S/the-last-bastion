@@ -1,0 +1,19 @@
+{
+  "id": "enemy.goblinRunner",
+  "nameKey": "enemy.goblinRunner.name",
+  "class": "small",
+  "movement": { "type": "ground", "speed": 1.35 },
+  "health": 70,
+  "defense": { "armor": 0, "magicResistance": 0 },
+  "rewardGold": 6,
+  "leakDamage": 1,
+  "abilities": [],
+  "tags": ["goblin", "fast"],
+  "assets": {
+    "sprite": "enemy.goblinRunner.sprite",
+    "portrait": "enemy.goblinRunner.portrait"
+  },
+  "audio": {
+    "death": ["sfx.goblin.death.01", "sfx.goblin.death.02"]
+  }
+}
