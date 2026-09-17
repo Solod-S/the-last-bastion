@@ -37,3 +37,25 @@
 **The Last Bastion** / **Последний рубеж**.
 
 Название считается временным и должно храниться в одном конфигурационном месте, чтобы его можно было заменить без поиска по исходникам.
+
+---
+
+## 🎮 Быстрый запуск Vertical Slice
+
+Проект собран на стеке **TypeScript + Vite + Phaser 3 + React + Zustand**.
+
+```bash
+npm install
+npm run dev
+```
+
+Откройте браузер: `http://localhost:3000`.
+
+### Тестирование и сборка
+```bash
+npm run test    # Запуск unit-тестов (Vitest)
+npm run build   # Чистая production-сборка (TypeScript + Vite)
+```
+
+Детальный план реализации и статус описаны в `docs/IMPLEMENTATION_PLAN.md`.
+
