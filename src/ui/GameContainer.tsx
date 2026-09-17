@@ -18,6 +18,7 @@ import { BossHealthBar } from './hud/BossHealthBar';
 import { HeroAndSpellsPanel } from './hud/HeroAndSpellsPanel';
 import { CampaignMapModal } from './screens/CampaignMapModal';
 import { TechTreeModal } from './screens/TechTreeModal';
+import { CodexModal } from './screens/CodexModal';
 import { DevTools } from './debug/DevTools';
 import './theme.css';
 
@@ -134,6 +135,7 @@ export const GameContainer: React.FC = () => {
       <EnemyInspector />
       <CampaignMapModal />
       <TechTreeModal />
+      <CodexModal />
       <BriefingModal />
       <VictoryModal />
       <DefeatModal />

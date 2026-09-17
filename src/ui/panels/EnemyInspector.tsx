@@ -45,7 +45,7 @@ export const EnemyInspector: React.FC = () => {
             }}
           >
             <img
-              src={`/assets/enemies/${definition.assetKey}.png`}
+              src={definition.assetKey === 'enemy_troll_king' || definition.assetKey === 'boss_troll_king' ? '/assets/enemies/boss_king_grukk.png' : `/assets/enemies/${definition.assetKey}.png`}
               alt={definition.id}
               style={{ width: '100%', height: '100%', objectFit: 'contain' }}
             />

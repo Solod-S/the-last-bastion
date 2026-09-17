@@ -34,6 +34,7 @@ interface GameStoreState {
   isDevToolsOpen: boolean;
   isCampaignMapOpen: boolean;
   isTechTreeOpen: boolean;
+  isCodexOpen: boolean;
 
   // Actions
   setCurrentMissionId: (id: string) => void;
@@ -42,6 +43,7 @@ interface GameStoreState {
   setDevToolsOpen: (open: boolean) => void;
   setCampaignMapOpen: (open: boolean) => void;
   setTechTreeOpen: (open: boolean) => void;
+  setCodexOpen: (open: boolean) => void;
   setActiveSpellToCast: (spellId: string | null) => void;
   setIsPlacingHero: (placing: boolean) => void;
   clearSelection: () => void;
@@ -79,6 +81,7 @@ export const useGameStore = create<GameStoreState>((set) => ({
   isDevToolsOpen: false,
   isCampaignMapOpen: false,
   isTechTreeOpen: false,
+  isCodexOpen: false,
 
   setCurrentMissionId: (id) => set({ currentMissionId: id }),
   setBriefingOpen: (open) => set({ isBriefingOpen: open }),
@@ -86,6 +89,7 @@ export const useGameStore = create<GameStoreState>((set) => ({
   setDevToolsOpen: (open) => set({ isDevToolsOpen: open }),
   setCampaignMapOpen: (open) => set({ isCampaignMapOpen: open }),
   setTechTreeOpen: (open) => set({ isTechTreeOpen: open }),
+  setCodexOpen: (open) => set({ isCodexOpen: open }),
   setActiveSpellToCast: (spellId) => set({ activeSpellToCast: spellId, isPlacingHero: false }),
   setIsPlacingHero: (placing) => set({ isPlacingHero: placing, activeSpellToCast: null }),
   clearSelection: () => {

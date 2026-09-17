@@ -124,6 +124,22 @@ export class VFXManager {
       }
     });
 
+    // High quality explosion burst art from concept pack
+    if (this.scene.textures.exists('vfx_explosion_aoe')) {
+      const burst = this.scene.add.sprite(x, y, 'vfx_explosion_aoe');
+      burst.setDisplaySize(radius * 1.8, radius * 1.8);
+      burst.setDepth(y + 35);
+      this.scene.tweens.add({
+        targets: burst,
+        scaleX: burst.scaleX * 1.2,
+        scaleY: burst.scaleY * 1.2,
+        alpha: 0,
+        duration: 380,
+        ease: 'Quad.easeOut',
+        onComplete: () => burst.destroy()
+      });
+    }
+
     // Sparks
     for (let i = 0; i < 6; i++) {
       const spark = this.scene.add.sprite(x, y, 'vfx_spark');
@@ -332,16 +348,17 @@ export class VFXManager {
   }
 
   public spawnAcidPool(x: number, y: number): void {
-    if (!this.scene.textures.exists('vfx_acid_pool')) return;
-    const pool = this.scene.add.sprite(x, y, 'vfx_acid_pool');
-    pool.setDisplaySize(64, 42);
+    const key = this.scene.textures.exists('vfx_poison_cloud') ? 'vfx_poison_cloud' : 'vfx_acid_pool';
+    if (!this.scene.textures.exists(key)) return;
+    const pool = this.scene.add.sprite(x, y, key);
+    pool.setDisplaySize(72, 48);
     pool.setDepth(y - 5);
-    pool.setAlpha(0.85);
+    pool.setAlpha(0.9);
 
     this.scene.tweens.add({
       targets: pool,
-      scaleX: 1.15,
-      scaleY: 1.15,
+      scaleX: pool.scaleX * 1.15,
+      scaleY: pool.scaleY * 1.15,
       duration: 1000,
       yoyo: true,
       repeat: 2,

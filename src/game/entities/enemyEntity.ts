@@ -76,8 +76,11 @@ export class EnemyEntity extends Phaser.GameObjects.Container implements ITarget
 
     // Sprite
     this.sprite = scene.add.sprite(0, 0, definition.assetKey);
-    this.targetSize = definition.class === 'boss' ? 84 : definition.class === 'large' ? 62 : definition.class === 'small' ? 40 : 48;
-    this.sprite.setDisplaySize(this.targetSize, this.targetSize);
+    const origW = this.sprite.width || 1;
+    const origH = this.sprite.height || 1;
+    const aspect = origW / origH;
+    this.targetSize = definition.class === 'boss' ? 105 : definition.class === 'large' ? 70 : definition.class === 'small' ? 42 : 52;
+    this.sprite.setDisplaySize(this.targetSize * Math.min(1.4, aspect), this.targetSize);
     this.add(this.sprite);
 
     // HP Bar Container

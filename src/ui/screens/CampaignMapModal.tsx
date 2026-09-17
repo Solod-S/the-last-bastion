@@ -200,11 +200,22 @@ export const CampaignMapModal: React.FC = () => {
               flex: 1,
               position: 'relative',
               backgroundColor: '#0c1322',
-              backgroundImage:
-                'radial-gradient(ellipse at center, rgba(30, 58, 138, 0.25) 0%, rgba(10, 15, 30, 0.95) 100%)',
+              backgroundImage: 'url(/assets/ui/campaign_map_concept_bg.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
               overflow: 'hidden'
             }}
           >
+            {/* Dark Vignette Overlay for Readability */}
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background:
+                  'radial-gradient(ellipse at center, rgba(12, 19, 34, 0.45) 0%, rgba(5, 8, 15, 0.85) 100%)',
+                pointerEvents: 'none'
+              }}
+            />
             {/* SVG Connecting Paths */}
             <svg
               style={{
@@ -392,6 +403,36 @@ export const CampaignMapModal: React.FC = () => {
               >
                 {i18n.t(selectedMission.nameKey)}
               </h1>
+
+              {/* Mission Preview Banner */}
+              <div
+                style={{
+                  height: 90,
+                  borderRadius: 6,
+                  overflow: 'hidden',
+                  marginBottom: 14,
+                  border: '1px solid #334155',
+                  position: 'relative'
+                }}
+              >
+                <img
+                  src={
+                    selectedMission.hasBoss
+                      ? '/assets/scenes/scene_rift_storm.png'
+                      : `/assets/scenes/scene_${['first_rift', 'march_to_ruins', 'swamp_crossing', 'volcanic_ascent', 'frozen_watch'][selectedMission.missionNumber ? (selectedMission.missionNumber - 1) % 5 : 0]}.png`
+                  }
+                  alt="Mission Preview"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background:
+                      'linear-gradient(180deg, transparent 30%, rgba(15, 23, 42, 0.85) 100%)'
+                  }}
+                />
+              </div>
 
               {/* Story Intro */}
               <div

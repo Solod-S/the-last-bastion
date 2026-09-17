@@ -14,7 +14,8 @@ import {
   Wrench,
   Flame,
   Map,
-  Sparkles
+  Sparkles,
+  BookOpen
 } from 'lucide-react';
 
 export const TopHud: React.FC = () => {
@@ -210,6 +211,18 @@ export const TopHud: React.FC = () => {
           title={i18n.t('tech_tree.title') || 'Улучшения Бастиона'}
         >
           <Sparkles size={16} />
+        </button>
+
+        {/* Codex */}
+        <button
+          className="fantasy-btn fantasy-btn-primary"
+          onClick={() => {
+            audioManager.playUi();
+            useGameStore.setState({ isCodexOpen: true });
+          }}
+          title="Кодекс Бастиона (Бестиарий, Башни, Герои, Лор)"
+        >
+          <BookOpen size={16} />
         </button>
 
         {/* Settings */}

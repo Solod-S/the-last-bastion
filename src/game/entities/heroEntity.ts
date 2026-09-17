@@ -43,13 +43,16 @@ export class HeroEntity extends Phaser.GameObjects.Container {
     this.add(this.selectionRing);
 
     // Hero Sprite
-    this.baseSprite = scene.add.sprite(0, -18, definition.assetKey);
-    this.baseSprite.setDisplaySize(54, 64);
+    this.baseSprite = scene.add.sprite(0, -22, definition.assetKey);
+    const origW = this.baseSprite.width || 1;
+    const origH = this.baseSprite.height || 1;
+    const aspect = origW / origH;
+    this.baseSprite.setDisplaySize(72 * Math.min(1.3, aspect), 72);
     this.add(this.baseSprite);
 
     // HP Bar
     this.hpBg = scene.add.graphics();
-    this.hpBg.setPosition(-20, -42);
+    this.hpBg.setPosition(-20, -50);
     this.add(this.hpBg);
     this.updateHpBar();
 

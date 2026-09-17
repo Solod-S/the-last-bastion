@@ -34,7 +34,7 @@ export const BuildMenu: React.FC = () => {
       case 'cannon':
         return '/assets/towers/tower_cannon_l1.png';
       case 'alchemy':
-        return 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect x="16" y="44" width="32" height="16" rx="4" fill="%231e293b" stroke="%2310b981" stroke-width="2"/><circle cx="32" cy="32" r="14" fill="%2310b981" stroke="%2334d399" stroke-width="2"/><rect x="28" y="10" width="8" height="18" fill="%2378350f" stroke="%23b45309" stroke-width="2"/><circle cx="32" cy="32" r="4" fill="%23ffffff" opacity="0.8"/></svg>';
+        return '/assets/towers/tower_alchemy_l1.png';
       case 'barracks':
       default:
         return '/assets/towers/tower_barracks_l1.png';

@@ -89,7 +89,7 @@ export const TowerInspector: React.FC = () => {
               }}
             >
               <img
-                src={`/assets/towers/tower_${towerClass}_l1.png`}
+                src={`/assets/towers/tower_${towerClass}_l${level}.png`}
                 alt={towerClass}
                 style={{ width: '100%', height: '100%', objectFit: 'contain' }}
               />

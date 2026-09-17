@@ -3,7 +3,7 @@ import { useGameStore } from '../store/gameStore';
 import { gameEventBus, GameEvents } from '../../game/events/gameEventBus';
 import { audioManager } from '../../services/audio/audioManager';
 import { i18n } from '../../services/localization/i18n';
-import { Shield, Flame, Users, Zap, Move } from 'lucide-react';
+import { Flame, Users, Move } from 'lucide-react';
 
 export const HeroAndSpellsPanel: React.FC = () => {
   const heroState = useGameStore((state) => state.heroState);
@@ -98,33 +98,38 @@ export const HeroAndSpellsPanel: React.FC = () => {
             background: 'rgba(15, 23, 42, 0.9)'
           }}
         >
-          {/* Avatar Icon */}
+          {/* Avatar Icon with Concept Portrait */}
           <div
             style={{
               position: 'relative',
-              width: 52,
-              height: 52,
+              width: 54,
+              height: 54,
               borderRadius: 8,
               backgroundColor: '#1e293b',
               border: '2px solid #fbbf24',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              overflow: 'hidden'
+              overflow: 'hidden',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.6)'
             }}
           >
-            <Shield size={32} color="#38bdf8" />
+            <img
+              src="/assets/heroes/portrait_hero_aldren.png"
+              alt="Sir Aldren"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
             {heroState.isDead && (
               <div
                 style={{
                   position: 'absolute',
                   inset: 0,
-                  backgroundColor: 'rgba(0,0,0,0.7)',
+                  backgroundColor: 'rgba(0,0,0,0.75)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   color: '#ef4444',
-                  fontSize: 10,
+                  fontSize: 11,
                   fontWeight: 800
                 }}
               >
@@ -160,8 +165,8 @@ export const HeroAndSpellsPanel: React.FC = () => {
                 }}
               />
             </div>
-            <div style={{ fontSize: 9, color: '#94a3b8', textAlign: 'right' }}>
-              {heroState.currentHp}/{heroState.maxHp}
+            <div style={{ fontSize: 9, color: '#94a3b8', textAlign: 'right', fontWeight: 600 }}>
+              {Math.round(heroState.currentHp)} / {heroState.maxHp}
             </div>
           </div>
 
@@ -184,7 +189,7 @@ export const HeroAndSpellsPanel: React.FC = () => {
               <Move size={18} color="#ffffff" />
             </button>
 
-            {/* Ability Button */}
+            {/* Ability Button (Bastion Strike) */}
             <button
               className="fantasy-btn"
               onClick={handleHeroAbilityClick}
@@ -194,14 +199,19 @@ export const HeroAndSpellsPanel: React.FC = () => {
                 position: 'relative',
                 width: 38,
                 height: 38,
-                padding: 0,
+                padding: 3,
                 justifyContent: 'center',
                 backgroundColor: heroState.abilityCooldownRemaining > 0 ? '#0f172a' : '#854d0e',
                 borderColor: heroState.abilityCooldownRemaining > 0 ? '#334155' : '#fbbf24',
-                opacity: heroState.abilityCooldownRemaining > 0 || heroState.isDead ? 0.5 : 1
+                opacity: heroState.abilityCooldownRemaining > 0 || heroState.isDead ? 0.5 : 1,
+                overflow: 'hidden'
               }}
             >
-              <Zap size={18} color="#fef08a" />
+              <img
+                src="/assets/heroes/ability_bastion_strike_icon.png"
+                alt="Bastion Strike"
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+              />
               {heroState.abilityCooldownRemaining > 0 && (
                 <div
                   style={{

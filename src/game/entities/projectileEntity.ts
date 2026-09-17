@@ -53,10 +53,14 @@ export class ProjectileEntity extends Phaser.GameObjects.Container {
     // Texture selection
     if (config.type === 'arrow') {
       this.sprite.setTexture('proj_arrow');
+      this.sprite.setDisplaySize(26, 12);
     } else if (config.type === 'magic') {
-      this.sprite.setTexture('proj_magic');
+      const magicKey = this.scene.textures.exists('proj_magic_bolt') ? 'proj_magic_bolt' : 'proj_magic';
+      this.sprite.setTexture(magicKey);
+      this.sprite.setDisplaySize(26, 14);
     } else {
       this.sprite.setTexture('proj_cannonball');
+      this.sprite.setDisplaySize(18, 18);
     }
 
     this.destX = config.targetX ?? config.target.x;

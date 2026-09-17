@@ -3,7 +3,7 @@ import { useGameStore } from '../store/gameStore';
 import { gameEventBus, GameEvents } from '../../game/events/gameEventBus';
 import { i18n } from '../../services/localization/i18n';
 import { audioManager } from '../../services/audio/audioManager';
-import { Star, RotateCcw, Trophy, Skull, Coins, Clock, Hammer, Heart } from 'lucide-react';
+import { Star, RotateCcw, Skull, Coins, Clock, Hammer, Heart } from 'lucide-react';
 
 export const VictoryModal: React.FC = () => {
   const victoryStats = useGameStore((state) => state.victoryStats);
@@ -46,7 +46,18 @@ export const VictoryModal: React.FC = () => {
           boxShadow: '0 20px 50px rgba(0,0,0,0.9), 0 0 35px rgba(245, 158, 11, 0.35)'
         }}
       >
-        <Trophy size={48} color="#fbbf24" style={{ margin: '0 auto 12px' }} />
+        {/* Official Logo */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 10 }}>
+          <img
+            src="/assets/ui/logo_the_last_bastion.png"
+            alt="The Last Bastion"
+            style={{
+              height: 58,
+              objectFit: 'contain',
+              filter: 'drop-shadow(0 4px 12px rgba(245, 158, 11, 0.5))'
+            }}
+          />
+        </div>
 
         <h1
           style={{
