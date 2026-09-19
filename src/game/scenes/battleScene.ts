@@ -369,13 +369,16 @@ export class BattleScene extends Phaser.Scene {
       const marker = this.add.sprite(slot.x, slot.y, 'tex_build_slot');
       marker.setDisplaySize(76, 54);
       marker.setDepth(5);
+      marker.setAlpha(0.85);
       marker.setInteractive({ useHandCursor: true });
 
       marker.on('pointerover', () => {
         marker.setDisplaySize(82, 58);
+        marker.setAlpha(1.0);
       });
       marker.on('pointerout', () => {
         marker.setDisplaySize(76, 54);
+        marker.setAlpha(0.85);
       });
       marker.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
         pointer.event.stopPropagation();

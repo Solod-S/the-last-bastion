@@ -16,6 +16,7 @@ import { DefeatModal } from './screens/DefeatModal';
 import { SettingsModal } from './screens/SettingsModal';
 import { BossHealthBar } from './hud/BossHealthBar';
 import { HeroAndSpellsPanel } from './hud/HeroAndSpellsPanel';
+import { MainMenuScreen } from './screens/MainMenuScreen';
 import { CampaignMapModal } from './screens/CampaignMapModal';
 import { TechTreeModal } from './screens/TechTreeModal';
 import { CodexModal } from './screens/CodexModal';
@@ -26,6 +27,7 @@ export const GameContainer: React.FC = () => {
   const gameContainerRef = useRef<HTMLDivElement>(null);
   const phaserGameRef = useRef<Phaser.Game | null>(null);
 
+  const isMainMenuOpen = useGameStore((state) => state.isMainMenuOpen);
   const clearSelection = useGameStore((state) => state.clearSelection);
   const setSettingsOpen = useGameStore((state) => state.setSettingsOpen);
   const isSettingsOpen = useGameStore((state) => state.isSettingsOpen);
@@ -60,6 +62,13 @@ export const GameContainer: React.FC = () => {
       }
 
       audioManager.ensureAudioUnlocked();
+
+      if (useGameStore.getState().isMainMenuOpen) {
+        if (e.code === 'Backquote') {
+          setDevToolsOpen(!isDevToolsOpen);
+        }
+        return;
+      }
 
       switch (e.code) {
         case 'Space':
@@ -126,13 +135,22 @@ export const GameContainer: React.FC = () => {
         }}
       />
 
-      {/* React UI Overlays */}
-      <TopHud />
-      <BossHealthBar />
-      <HeroAndSpellsPanel />
-      <BuildMenu />
-      <TowerInspector />
-      <EnemyInspector />
+      {/* Main Menu Screen */}
+      <MainMenuScreen />
+
+      {/* In-game React UI Overlays */}
+      {!isMainMenuOpen && (
+        <>
+          <TopHud />
+          <BossHealthBar />
+          <HeroAndSpellsPanel />
+          <BuildMenu />
+          <TowerInspector />
+          <EnemyInspector />
+        </>
+      )}
+
+      {/* Global Modals (Accessible both in-game and from Main Menu) */}
       <CampaignMapModal />
       <TechTreeModal />
       <CodexModal />

@@ -10,11 +10,11 @@ export class PreloadScene extends Phaser.Scene {
   preload(): void {
     // 1. Regional Map Backgrounds
     this.load.image('map_forest_road_bg', '/assets/maps/forest_road_bg.png');
-    this.load.image('map_village_crossing_bg', '/assets/maps/broken_pass_bg.png');
-    this.load.image('map_stone_bridge_bg', '/assets/maps/sunken_causeway_bg.png');
-    this.load.image('map_crystal_grove_bg', '/assets/maps/molten_ridge_bg.png');
-    this.load.image('map_broken_mill_bg', '/assets/maps/frozen_front_bg.png');
-    this.load.image('map_troll_pass_bg', '/assets/maps/shattered_path_bg.png');
+    this.load.image('map_village_crossing_bg', '/assets/maps/village_crossing_bg.png');
+    this.load.image('map_stone_bridge_bg', '/assets/maps/stone_bridge_bg.png');
+    this.load.image('map_crystal_grove_bg', '/assets/maps/crystal_grove_bg.png');
+    this.load.image('map_broken_mill_bg', '/assets/maps/broken_mill_bg.png');
+    this.load.image('map_troll_pass_bg', '/assets/maps/troll_pass_bg.png');
 
     // 2. Towers Progression (L1, L2, L3 + Specs)
     const towerTypes = ['archer', 'mage', 'cannon', 'barracks', 'alchemy'];
@@ -64,29 +64,54 @@ export class PreloadScene extends Phaser.Scene {
       'soldier_kingdom',
       'prop_mana_crystal',
       'prop_treasure_chest',
-      'tex_build_slot'
+      'tex_build_slot',
+      'hero_sir_aldren',
+      'boss_king_grukk',
+      'enemy_goblin_runner',
+      'enemy_orc_brute',
+      'enemy_rift_knight',
+      'enemy_shaman_healer',
+      'enemy_sapper',
+      'enemy_goblin_spearman',
+      'enemy_boar_raider',
+      'enemy_iron_shield_raider',
+      'enemy_rot_walker'
     ];
+
+    const towerTypes = ['archer', 'mage', 'cannon', 'barracks', 'alchemy'];
+    const tiers = ['l1', 'l2', 'l3', 'spec1', 'spec2'];
+    for (const t of towerTypes) {
+      for (const tier of tiers) {
+        cutoutKeys.push(`tower_${t}_${tier}`);
+      }
+    }
 
     for (const key of cutoutKeys) {
       removeSpriteBackground(this, key, key);
     }
 
-    // Aliases for Hero and Boss
+    // Aliases for Hero and Boss from the processed textures
     const heroTex = this.textures.get('hero_sir_aldren');
     if (heroTex && !this.textures.exists('hero_commander')) {
-      this.textures.addImage('hero_commander', heroTex.getSourceImage() as HTMLImageElement);
+      const src = heroTex.getSourceImage();
+      if (src) {
+        this.textures.addImage('hero_commander', src as HTMLImageElement);
+      }
     }
 
     const bossTex = this.textures.get('boss_king_grukk');
     if (bossTex) {
-      if (!this.textures.exists('boss_troll_king')) {
-        this.textures.addImage('boss_troll_king', bossTex.getSourceImage() as HTMLImageElement);
-      }
-      if (!this.textures.exists('enemy_troll_king')) {
-        this.textures.addImage('enemy_troll_king', bossTex.getSourceImage() as HTMLImageElement);
-      }
-      if (!this.textures.exists('enemy_troll')) {
-        this.textures.addImage('enemy_troll', bossTex.getSourceImage() as HTMLImageElement);
+      const src = bossTex.getSourceImage();
+      if (src) {
+        if (!this.textures.exists('boss_troll_king')) {
+          this.textures.addImage('boss_troll_king', src as HTMLImageElement);
+        }
+        if (!this.textures.exists('enemy_troll_king')) {
+          this.textures.addImage('enemy_troll_king', src as HTMLImageElement);
+        }
+        if (!this.textures.exists('enemy_troll')) {
+          this.textures.addImage('enemy_troll', src as HTMLImageElement);
+        }
       }
     }
 

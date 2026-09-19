@@ -29,15 +29,41 @@ export function removeSpriteBackground(
   const imgData = ctx.getImageData(0, 0, width, height);
   const data = imgData.data;
 
+  // Pre-clear margin text from concept sheets if applicable
+  if (sourceKey.includes('aldren')) {
+    // Clear top-right speech text
+    for (let y = 0; y < Math.floor(height * 0.25); y++) {
+      for (let x = Math.floor(width * 0.72); x < width; x++) {
+        data[(y * width + x) * 4 + 3] = 0;
+      }
+    }
+  } else if (sourceKey.includes('grukk')) {
+    // Clear top-left header text
+    for (let y = 0; y < Math.floor(height * 0.15); y++) {
+      for (let x = 0; x < Math.floor(width * 0.32); x++) {
+        data[(y * width + x) * 4 + 3] = 0;
+      }
+    }
+  }
+
   // Track visited boundary-connected pixels
   const visited = new Uint8Array(width * height);
   const queue: number[] = [];
 
   const isBackgroundPixel = (idx: number) => {
+    const a = data[idx * 4 + 3];
+    if (a < 20) return true; // Already transparent
     const r = data[idx * 4];
     const g = data[idx * 4 + 1];
     const b = data[idx * 4 + 2];
-    return r >= threshold && g >= threshold && b >= threshold;
+
+    // White / near-white background
+    if (r >= threshold && g >= threshold && b >= threshold) return true;
+
+    // Parchment / light beige background from concept art sheets
+    if (r >= 205 && g >= 190 && b >= 165 && Math.abs(r - g) <= 40 && r >= b) return true;
+
+    return false;
   };
 
   // Seed boundary edges

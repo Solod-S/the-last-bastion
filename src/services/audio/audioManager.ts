@@ -95,6 +95,22 @@ class AudioManager {
   public stopMusic(): void {
     this.engine.stopBattleMusic();
   }
+
+  public startMenuMusic(): void {
+    this.engine.startMenuMusic();
+  }
+
+  public stopMenuMusic(): void {
+    this.engine.stopMenuMusic();
+  }
+
+  public playMenuHover(): void {
+    this.engine.playMenuHover();
+  }
+
+  public playMenuSelect(): void {
+    this.engine.playMenuSelect();
+  }
 }
 
 export const audioManager = new AudioManager();

@@ -105,7 +105,7 @@ export const HeroAndSpellsPanel: React.FC = () => {
               width: 54,
               height: 54,
               borderRadius: 8,
-              backgroundColor: '#1e293b',
+              background: 'radial-gradient(circle, #334155 0%, #0f172a 100%)',
               border: '2px solid #fbbf24',
               display: 'flex',
               alignItems: 'center',
@@ -117,7 +117,7 @@ export const HeroAndSpellsPanel: React.FC = () => {
             <img
               src="/assets/heroes/portrait_hero_aldren.png"
               alt="Sir Aldren"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
             />
             {heroState.isDead && (
               <div
@@ -243,8 +243,8 @@ export const HeroAndSpellsPanel: React.FC = () => {
           title={i18n.t('spell.meteor.name')}
           style={{
             position: 'relative',
-            width: 54,
-            height: 54,
+            width: 58,
+            height: 58,
             borderRadius: 10,
             border: activeSpellToCast === 'spell_meteor' ? '2px solid #ef4444' : '2px solid #78350f',
             boxShadow:
@@ -256,12 +256,26 @@ export const HeroAndSpellsPanel: React.FC = () => {
             justifyContent: 'center',
             cursor: meteorCooldown > 0 ? 'not-allowed' : 'pointer',
             opacity: meteorCooldown > 0 ? 0.6 : 1,
-            transition: 'transform 0.1s ease'
+            transition: 'transform 0.1s ease',
+            overflow: 'hidden',
+            padding: '4px 2px'
           }}
         >
-          <Flame size={26} color="#f97316" />
-          <span style={{ fontSize: 8, color: '#fef08a', fontWeight: 700 }}>
-            {i18n.t('spell.meteor.short') || 'METEOR'}
+          <Flame size={24} color="#f97316" />
+          <span
+            style={{
+              fontSize: 9,
+              color: '#fef08a',
+              fontWeight: 800,
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              maxWidth: 52,
+              marginTop: 2,
+              textAlign: 'center'
+            }}
+          >
+            {i18n.t('spell.meteor.short')}
           </span>
           {meteorCooldown > 0 && (
             <div
@@ -290,8 +304,8 @@ export const HeroAndSpellsPanel: React.FC = () => {
           title={i18n.t('spell.reinforcements.name')}
           style={{
             position: 'relative',
-            width: 54,
-            height: 54,
+            width: 58,
+            height: 58,
             borderRadius: 10,
             border:
               activeSpellToCast === 'spell_reinforcements'
@@ -308,12 +322,26 @@ export const HeroAndSpellsPanel: React.FC = () => {
             justifyContent: 'center',
             cursor: militiaCooldown > 0 ? 'not-allowed' : 'pointer',
             opacity: militiaCooldown > 0 ? 0.6 : 1,
-            transition: 'transform 0.1s ease'
+            transition: 'transform 0.1s ease',
+            overflow: 'hidden',
+            padding: '4px 2px'
           }}
         >
-          <Users size={26} color="#60a5fa" />
-          <span style={{ fontSize: 8, color: '#93c5fd', fontWeight: 700 }}>
-            {i18n.t('spell.reinforcements.short') || 'MILITIA'}
+          <Users size={24} color="#60a5fa" />
+          <span
+            style={{
+              fontSize: 9,
+              color: '#93c5fd',
+              fontWeight: 800,
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              maxWidth: 52,
+              marginTop: 2,
+              textAlign: 'center'
+            }}
+          >
+            {i18n.t('spell.reinforcements.short')}
           </span>
           {militiaCooldown > 0 && (
             <div

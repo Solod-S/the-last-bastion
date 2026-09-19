@@ -29,6 +29,7 @@ interface GameStoreState {
 
   // Modals & Navigation
   currentMissionId: string;
+  isMainMenuOpen: boolean;
   isBriefingOpen: boolean;
   isSettingsOpen: boolean;
   isDevToolsOpen: boolean;
@@ -38,6 +39,7 @@ interface GameStoreState {
 
   // Actions
   setCurrentMissionId: (id: string) => void;
+  setMainMenuOpen: (open: boolean) => void;
   setBriefingOpen: (open: boolean) => void;
   setSettingsOpen: (open: boolean) => void;
   setDevToolsOpen: (open: boolean) => void;
@@ -76,6 +78,7 @@ export const useGameStore = create<GameStoreState>((set) => ({
   isPlacingHero: false,
 
   currentMissionId: 'mission.greenlands.01',
+  isMainMenuOpen: true, // Start in main menu by default
   isBriefingOpen: false, // Initially false so player can see campaign or start
   isSettingsOpen: false,
   isDevToolsOpen: false,
@@ -84,6 +87,7 @@ export const useGameStore = create<GameStoreState>((set) => ({
   isCodexOpen: false,
 
   setCurrentMissionId: (id) => set({ currentMissionId: id }),
+  setMainMenuOpen: (open) => set({ isMainMenuOpen: open }),
   setBriefingOpen: (open) => set({ isBriefingOpen: open }),
   setSettingsOpen: (open) => set({ isSettingsOpen: open }),
   setDevToolsOpen: (open) => set({ isDevToolsOpen: open }),

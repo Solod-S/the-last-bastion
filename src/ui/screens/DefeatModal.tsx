@@ -109,7 +109,7 @@ export const DefeatModal: React.FC = () => {
         </div>
 
         {/* Buttons */}
-        <div style={{ display: 'flex', gap: 10 }}>
+        <div style={{ display: 'flex', gap: 8 }}>
           <button
             className="fantasy-btn"
             onClick={() => {
@@ -117,18 +117,32 @@ export const DefeatModal: React.FC = () => {
               audioManager.playUi();
               useGameStore.setState({ defeatStats: null, isCampaignMapOpen: true });
             }}
-            style={{ flex: 1, justifyContent: 'center', padding: '12px 16px', fontSize: 14 }}
+            style={{ flex: 1, justifyContent: 'center', padding: '10px 12px', fontSize: 13 }}
           >
-            <span>{i18n.t('campaign.map.title') || 'Карта кампании'}</span>
+            <span>{i18n.t('campaign.map.title') || 'Карта'}</span>
           </button>
 
           <button
             className="fantasy-btn fantasy-btn-primary"
             onClick={handleRetry}
-            style={{ flex: 1, justifyContent: 'center', padding: '12px 16px', fontSize: 14 }}
+            style={{ flex: 1, justifyContent: 'center', padding: '10px 12px', fontSize: 13 }}
           >
-            <RotateCcw size={16} />
-            <span>{i18n.t('mission.defeat.retry') || 'Попробовать снова'}</span>
+            <RotateCcw size={15} />
+            <span>{i18n.t('mission.defeat.retry') || 'Заново'}</span>
+          </button>
+
+          <button
+            className="fantasy-btn"
+            onClick={() => {
+              audioManager.ensureAudioUnlocked();
+              audioManager.playUi();
+              audioManager.stopMusic();
+              audioManager.startMenuMusic();
+              useGameStore.setState({ defeatStats: null, isMainMenuOpen: true });
+            }}
+            style={{ flex: 1, justifyContent: 'center', padding: '10px 12px', fontSize: 13 }}
+          >
+            <span>{i18n.t('menu.returnToMenu')}</span>
           </button>
         </div>
       </div>

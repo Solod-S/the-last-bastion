@@ -15,7 +15,8 @@ import {
   Flame,
   Map,
   Sparkles,
-  BookOpen
+  BookOpen,
+  Home
 } from 'lucide-react';
 
 export const TopHud: React.FC = () => {
@@ -235,6 +236,20 @@ export const TopHud: React.FC = () => {
           title={i18n.t('game.settings')}
         >
           <Settings size={16} />
+        </button>
+
+        {/* Main Menu */}
+        <button
+          className="fantasy-btn"
+          onClick={() => {
+            audioManager.playUi();
+            audioManager.stopMusic();
+            audioManager.startMenuMusic();
+            useGameStore.setState({ isMainMenuOpen: true });
+          }}
+          title={i18n.t('menu.returnToMenu')}
+        >
+          <Home size={16} />
         </button>
 
         {/* DevTools */}

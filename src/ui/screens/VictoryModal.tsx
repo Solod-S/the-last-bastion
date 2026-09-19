@@ -150,7 +150,7 @@ export const VictoryModal: React.FC = () => {
             </button>
           )}
 
-          <div style={{ display: 'flex', gap: 10 }}>
+          <div style={{ display: 'flex', gap: 8 }}>
             <button
               className="fantasy-btn fantasy-btn-primary"
               onClick={() => {
@@ -158,18 +158,32 @@ export const VictoryModal: React.FC = () => {
                 audioManager.playUi();
                 useGameStore.setState({ victoryStats: null, isCampaignMapOpen: true });
               }}
-              style={{ flex: 1, justifyContent: 'center', padding: '10px 16px', fontSize: 14 }}
+              style={{ flex: 1, justifyContent: 'center', padding: '10px 12px', fontSize: 13 }}
             >
-              <span>{i18n.t('campaign.map.title') || 'Карта кампании'}</span>
+              <span>{i18n.t('campaign.map.title') || 'Карта'}</span>
             </button>
 
             <button
               className="fantasy-btn"
               onClick={handleRestart}
-              style={{ flex: 1, justifyContent: 'center', padding: '10px 16px', fontSize: 14 }}
+              style={{ flex: 1, justifyContent: 'center', padding: '10px 12px', fontSize: 13 }}
             >
-              <RotateCcw size={16} />
+              <RotateCcw size={15} />
               <span>{i18n.t('game.restart')}</span>
+            </button>
+
+            <button
+              className="fantasy-btn"
+              onClick={() => {
+                audioManager.ensureAudioUnlocked();
+                audioManager.playUi();
+                audioManager.stopMusic();
+                audioManager.startMenuMusic();
+                useGameStore.setState({ victoryStats: null, isMainMenuOpen: true });
+              }}
+              style={{ flex: 1, justifyContent: 'center', padding: '10px 12px', fontSize: 13 }}
+            >
+              <span>{i18n.t('menu.returnToMenu')}</span>
             </button>
           </div>
         </div>

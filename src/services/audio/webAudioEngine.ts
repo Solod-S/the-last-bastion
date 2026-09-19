@@ -336,6 +336,124 @@ export class WebAudioEngine {
     });
   }
 
+  private menuMusicInterval: number | null = null;
+
+  // Menu Music: Noble fantasy chord progression with arpeggios
+  public startMenuMusic(): void {
+    if (this.menuMusicInterval) return;
+    this.ensureContext();
+
+    const menuChords = [
+      { bass: 146.83, chord: [220.0, 349.23, 440.0], arp: [587.33, 523.25, 440.0, 349.23] }, // Dm
+      { bass: 116.54, chord: [174.61, 293.66, 349.23], arp: [466.16, 440.0, 349.23, 293.66] }, // Bb
+      { bass: 130.81, chord: [196.0, 261.63, 329.63], arp: [523.25, 493.88, 392.0, 329.63] },  // C
+      { bass: 110.0,  chord: [164.81, 220.0, 261.63], arp: [440.0, 392.0, 329.63, 261.63] }    // Am
+    ];
+    let step = 0;
+
+    const playStep = () => {
+      if (!this.ctx || this.isMuted) return;
+      const now = this.ctx.currentTime;
+      const { bass, chord, arp } = menuChords[step % menuChords.length];
+      step++;
+
+      // Warm bass drone
+      const bassOsc = this.ctx.createOscillator();
+      const bassGain = this.ctx.createGain();
+      bassOsc.type = 'triangle';
+      bassOsc.frequency.setValueAtTime(bass, now);
+      bassGain.gain.setValueAtTime(0, now);
+      bassGain.gain.linearRampToValueAtTime(0.12, now + 0.6);
+      bassGain.gain.exponentialRampToValueAtTime(0.005, now + 3.8);
+      bassOsc.connect(bassGain);
+      bassGain.connect(this.musicGain!);
+      bassOsc.start(now);
+      bassOsc.stop(now + 3.8);
+
+      // Warm mid chord
+      chord.forEach((freq) => {
+        const osc = this.ctx!.createOscillator();
+        const gain = this.ctx!.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now);
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(0.06, now + 0.8);
+        gain.gain.exponentialRampToValueAtTime(0.003, now + 3.8);
+        osc.connect(gain);
+        gain.connect(this.musicGain!);
+        osc.start(now);
+        osc.stop(now + 3.8);
+      });
+
+      // Delicate harp arpeggio
+      arp.forEach((freq, idx) => {
+        const harpTime = now + 0.4 + idx * 0.45;
+        const osc = this.ctx!.createOscillator();
+        const gain = this.ctx!.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, harpTime);
+        gain.gain.setValueAtTime(0, harpTime);
+        gain.gain.linearRampToValueAtTime(0.05, harpTime + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.001, harpTime + 1.2);
+        osc.connect(gain);
+        gain.connect(this.musicGain!);
+        osc.start(harpTime);
+        osc.stop(harpTime + 1.2);
+      });
+    };
+
+    playStep();
+    this.menuMusicInterval = window.setInterval(playStep, 4000);
+  }
+
+  public stopMenuMusic(): void {
+    if (this.menuMusicInterval) {
+      clearInterval(this.menuMusicInterval);
+      this.menuMusicInterval = null;
+    }
+  }
+
+  // SFX: Soft UI Hover Chime
+  public playMenuHover(): void {
+    if (!this.ctx || this.isMuted) return;
+    const now = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(660, now);
+    osc.frequency.exponentialRampToValueAtTime(880, now + 0.06);
+
+    gain.gain.setValueAtTime(0.08, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+
+    osc.connect(gain);
+    gain.connect(this.sfxGain!);
+    osc.start(now);
+    osc.stop(now + 0.06);
+  }
+
+  // SFX: Menu Select / Sword Draw
+  public playMenuSelect(): void {
+    if (!this.ctx || this.isMuted) return;
+    const now = this.ctx.currentTime;
+
+    // High metal ring
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(880, now);
+    osc.frequency.exponentialRampToValueAtTime(1760, now + 0.15);
+
+    gain.gain.setValueAtTime(0.2, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+
+    osc.connect(gain);
+    gain.connect(this.sfxGain!);
+    osc.start(now);
+    osc.stop(now + 0.25);
+  }
+
   // Continuous medieval music loop
   public startBattleMusic(): void {
     if (this.musicInterval) return;
